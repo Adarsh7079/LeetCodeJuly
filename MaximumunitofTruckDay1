@@ -1,0 +1,28 @@
+Input: boxTypes = [[5,10],[2,5],[4,7],[3,9]], truckSize = 10
+Output: 91
+
+static int compare(vector<int>v1,vector<int>v2)
+        {
+                return v1[1]>v2[1];
+        }
+    int maximumUnits(vector<vector<int>>& boxTypes, int truckSize) {
+           sort(boxTypes.begin(),boxTypes.end(),compare);
+            int i=0;
+            int total=0;
+            while(truckSize>0  && i< boxTypes.size())
+            {
+                    if(boxTypes[i][0]<truckSize)
+                    {
+                            total+=boxTypes[i][0]*boxTypes[i][1];
+                            truckSize-=boxTypes[i][0];
+                    }
+                    else
+                    {
+                            int leftVal = truckSize;
+                            truckSize-=leftVal;
+                          total+=leftVal*boxTypes[i][1];
+                    }
+                    i++;
+            }
+            return total;
+    }
